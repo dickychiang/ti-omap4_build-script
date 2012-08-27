@@ -1,0 +1,10 @@
+There are compile & build script for AP Module OMAP4 of Jorjin.
+
+Please copied it to your work space.
+
+For example:
+
+$ cp ti-omap4_build-script/x-loader_make.sh ${WORKSPACE}/x-loader
+$ cp ti-omap4_build-script/u-boot_make.sh ${WORKSPACE}/u-boot
+$ cp ti-omap4_build-script/kernel_make.sh ${WORKSPACE}/kernel
+$ cp ti-omap4_build-script/android_make.sh ${WORKSPACE}/mydroid
