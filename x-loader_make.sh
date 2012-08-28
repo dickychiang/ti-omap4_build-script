@@ -16,7 +16,7 @@ if [ "$1" = "--no-color" ]; then
 fi
 
 export MYXLOADER=`pwd`
-export PATH=${MYXLOADER}/../../toolchain/arm-2010q1/bin:$PATH
+export PATH=${MYXLOADER}/../toolchain/arm-2010q1/bin:$PATH
 export ARCH=arm
 export CROSS_COMPILE=arm-none-linux-gnueabi-
 export BOARD_TYPE=$1
