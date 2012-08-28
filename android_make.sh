@@ -34,17 +34,15 @@ export CROSS_COMPILE=arm-none-linux-gnueabi-
 echo -e "${YELLOW}Building Android File System start...${NORMAL}"
 build_blaze_tablet_sd () 
 {
-    cp -f device/ti/blaze_tablet/init.omap4blazeboard.rc-sd device/ti/blaze_tablet/init.omap4blazeboard.rc
-    cp -f system/core/rootdir/init.rc-sd system/core/rootdir/init.rc
+    rm -f ${IMG_PATH}/root/*.rc 
     source build/envsetup.sh
     lunch blaze_tablet-userdebug
-    make -j$THREAD 2>&1 |tee android_make.out
+    make -j$THREAD SD_BOOT=true 2>&1 |tee android_make.out
 }
 
 build_blaze_tablet_emmc() 
 {
-    cp -f device/ti/blaze_tablet/init.omap4blazeboard.rc-emmc device/ti/blaze_tablet/init.omap4blazeboard.rc
-    cp -f system/core/rootdir/init.rc-emmc system/core/rootdir/init.rc
+    rm -f ${IMG_PATH}/root/*.rc 
     source build/envsetup.sh
     lunch blaze_tablet-userdebug
     make -j$THREAD 2>&1 |tee android_make.out
@@ -52,17 +50,15 @@ build_blaze_tablet_emmc()
 
 build_blaze_sd() 
 {
-    cp -f device/ti/blaze/init.omap4blazeboard.rc-sd device/ti/blaze/init.omap4blazeboard.rc
-    cp -f system/core/rootdir/init.rc-sd system/core/rootdir/init.rc
+    rm -f ${IMG_PATH}/root/*.rc 
     source build/envsetup.sh
     lunch full_blaze-userdebug
-    make -j$THREAD 2>&1 |tee android_make.out
+    make -j$THREAD SD_BOOT=true 2>&1 |tee android_make.out
 }
 
 build_blaze_emmc() 
 {
-    cp -f device/ti/blaze/init.omap4blazeboard.rc-emmc device/ti/blaze/init.omap4blazeboard.rc
-    cp -f system/core/rootdir/init.rc-emmc system/core/rootdir/init.rc
+    rm -f ${IMG_PATH}/root/*.rc 
     source build/envsetup.sh
     lunch full_blaze-userdebug
     make -j$THREAD 2>&1 |tee android_make.out
