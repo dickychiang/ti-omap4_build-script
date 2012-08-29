@@ -55,17 +55,10 @@ build_blaze_emmc()
     make modules | tee make_modules.out
 }
 
-#build_jorjin_sd()
-#{
-#    make jjblaze_defconfig
-#    make -j4 uImage | tee make_kernel.out
-#    make -j4 modules | tee make_modules.out
-#}
-
 Usage()
 {
     echo -e "Usage : ./m.sh <BOARD_TYPE> <BOOT_TYPE>"
-    echo -e "Usage : ./m.sh [blaze_tablet | blaze | jorjin [ <emmc | sd> ] ] "
+    echo -e "Usage : ./m.sh [blaze_tablet | blaze [ <emmc | sd> ] ] "
 }
 
 if [ "$1" == "blaze_tablet" ] && [ "$2" == "sd" ]; then
@@ -76,8 +69,6 @@ elif [ "$1" == "blaze" ] && [ "$2" == "sd" ]; then
     build_blaze_sd
 elif [ "$1" == "blaze" ] && [ "$2" == "emmc" ]; then
     build_blaze_emmc
-#elif [ "$1" == "jorjin" ] && [ "$2" == "sd" ]; then
-#    build_jorjin_sd
 else
     echo -e "${YELLOW}Building kernel for <BOARD_TYPE> with <BOOT_TYPE> ${NORMAL}"
     echo -e "${YELLOW}ERROR !!!!${NORMAL}"
