@@ -24,14 +24,14 @@ export BOOT_TYPE=$2
 build_blaze_tablet_sd () 
 {
     make distclean
-    make ARCH=arm BOOT_DEV=sd omap44XXtablet_config
+    make ARCH=arm omap44XXtablet_config_sd
     make 2>&1 |tee make_u-boot.out
 }
 
 build_blaze_tablet_emmc() 
 {
     make distclean
-    make ARCH=arm BOOT_DEV=emmc omap44XXtablet_config
+    make ARCH=arm omap44XXtablet_config
     make 2>&1 |tee make_u-boot.out
 }
 

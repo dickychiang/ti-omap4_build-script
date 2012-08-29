@@ -29,8 +29,33 @@ export ARCH=arm
 export CROSS_COMPILE=arm-none-linux-gnueabi-
 
 # ============================
+# Building WLAN driver
+# ============================
+export KERNEL_PATH=${MYDROID}/../kernel/android-3.0
+export KLIB=${KERNEL_PATH}
+export KLIB_BUILD=${KLIB}
+echo -e "${YELLOW}Building WLAN Driver...${NORMAL}"
+make -C ${WLAN_PATH}
+echo -e "${YELLOW}Copy WLAN modules${NORMAL}"
+mkdir -p ${IMG_PATH}/system/lib/modules/
+cp ${WLAN_PATH}/compat/compat.ko ${IMG_PATH}/system/lib/modules/
+cp ${WLAN_PATH}/net/wireless/cfg80211.ko ${IMG_PATH}/system/lib/modules/
+cp ${WLAN_PATH}/net/mac80211/mac80211.ko ${IMG_PATH}/system/lib/modules/
+cp ${WLAN_PATH}/drivers/net/wireless/wl12xx/wl12xx.ko ${IMG_PATH}/system/lib/modules/
+cp ${WLAN_PATH}/drivers/net/wireless/wl12xx/wl12xx_sdio.ko ${IMG_PATH}/system/lib/modules/
+
+# ============================
+# Building GPS driver
+# ============================
+#export GPS_PATH=${MYDROID}/hardware/ti/gps/gnss
+#echo -e "${YELLOW}Building GPS Driver...${NORMAL}"
+#make -C ${GPS_PATH}
+#echo -e "${YELLOW}Copy WLAN modules${NORMAL}"
+#cp ${GPS_PATH}/gps_drv.ko ${IMG_PATH}/system/lib/modules/
+# ============================
 # Building Android File System
 # ============================
+
 echo -e "${YELLOW}Building Android File System start...${NORMAL}"
 build_blaze_tablet_sd () 
 {
@@ -88,28 +113,4 @@ else
 	echo -e "e.g.: ./m.sh blaze emmc 8          (8 threads for AFS build.)"
     exit 1
 fi
-
-# ============================
-# Building WLAN driver
-# ============================
-export KERNEL_PATH=${MYDROID}/../kernel/android-3.0
-export KLIB=${KERNEL_PATH}
-export KLIB_BUILD=${KLIB}
-echo -e "${YELLOW}Building WLAN Driver...${NORMAL}"
-make -C ${WLAN_PATH}
-echo -e "${YELLOW}Copy WLAN modules${NORMAL}"
-mkdir -p ${IMG_PATH}/system/lib/modules/
-cp ${WLAN_PATH}/compat/compat.ko ${IMG_PATH}/system/lib/modules/
-cp ${WLAN_PATH}/net/wireless/cfg80211.ko ${IMG_PATH}/system/lib/modules/
-cp ${WLAN_PATH}/net/mac80211/mac80211.ko ${IMG_PATH}/system/lib/modules/
-cp ${WLAN_PATH}/drivers/net/wireless/wl12xx/wl12xx.ko ${IMG_PATH}/system/lib/modules/
-cp ${WLAN_PATH}/drivers/net/wireless/wl12xx/wl12xx_sdio.ko ${IMG_PATH}/system/lib/modules/
-
-# ============================
-# Building GPS driver
-# ============================
-#export GPS_PATH=${MYDROID}/hardware/ti/gps/gnss
-#echo -e "${YELLOW}Building GPS Driver...${NORMAL}"
-#make -C ${GPS_PATH}
-#echo -e "${YELLOW}Copy WLAN modules${NORMAL}"
-#cp ${GPS_PATH}/gps_drv.ko ${IMG_PATH}/system/lib/modules/
+exit 0
