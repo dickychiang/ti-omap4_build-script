@@ -38,14 +38,14 @@ build_blaze_tablet_emmc()
 build_blaze_sd() 
 {
     make distclean
-    make ARCH=arm BOOT_DEV=sd omap4430sdp_config
+    make ARCH=arm omap4430sdp_config_sd
     make 2>&1 |tee make_u-boot.out
 }
 
 build_blaze_emmc() 
 {
     make distclean
-    make ARCH=arm BOOT_DEV=emmc omap4430sdp_config
+    make ARCH=arm omap4430sdp_config
     make 2>&1 |tee make_u-boot.out
 }
 
