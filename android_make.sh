@@ -24,14 +24,14 @@ export THREAD=$3
 export WLAN_PATH=${MYDROID}/hardware/ti/wlan/mac80211/compat_wl12xx
 export IMG_PATH=${MYDROID}/out/target/product/${BOARD_TYPE}
 export MYIMG=${MYDROID}/../prebuilt_images
-export PATH=$PATH:${MYDROID}/../toolchain/arm-2010q1/bin
+export PATH=$PATH:${MYDROID}/../../../toolchain/arm-2010q1/bin
+export KERNEL_PATH=${MYDROID}/kernel/
 export ARCH=arm
 export CROSS_COMPILE=arm-none-linux-gnueabi-
 
 # ============================
 # Building WLAN driver
 # ============================
-export KERNEL_PATH=${MYDROID}/../kernel/android-3.0
 export KLIB=${KERNEL_PATH}
 export KLIB_BUILD=${KLIB}
 echo -e "${YELLOW}Building WLAN Driver...${NORMAL}"

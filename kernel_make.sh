@@ -15,11 +15,10 @@ if [ "$1" = "--no-color" ]; then
 fi
 
 export KERNEL_PATH=`pwd`
-export MYDROID=${KERNEL_PATH}/../../mydroid
-export PATH=${KERNEL_PATH}/../../toolchain/arm-2010q1/bin:$PATH
 export ARCH=arm
 export CROSS_COMPILE=arm-none-linux-gnueabi-
-export PATH=${KERNEL_PATH}/../../u-boot/tools:$PATH
+export PATH=${KERNEL_PATH}/../u-boot/tools:$PATH
+export PATH=${KERNEL_PATH}/../../../../toolchain/arm-2010q1/bin:$PATH
 
 export CPU_TYPE=4460
 
