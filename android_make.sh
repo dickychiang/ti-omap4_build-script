@@ -34,6 +34,8 @@ export CROSS_COMPILE=arm-none-linux-gnueabi-
 # ============================
 export KLIB=${KERNEL_PATH}
 export KLIB_BUILD=${KLIB}
+echo -e "${YELLOW}Building Kernel & Drivers...${NORMAL}"
+make -j4 -C ${KERNEL_PATH}
 echo -e "${YELLOW}Building WLAN Driver...${NORMAL}"
 make -C ${WLAN_PATH}
 echo -e "${YELLOW}Copy WLAN modules${NORMAL}"
