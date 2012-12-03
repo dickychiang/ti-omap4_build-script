@@ -22,6 +22,7 @@ export BOARD_TYPE=$1
 export BOOT_TYPE=$2
 export THREAD=$3
 export WLAN_PATH=${MYDROID}/hardware/ti/wlan/mac80211/compat_wl12xx
+export BLUETI_PATH=${MYDROID}/hardware/ti/wpan/bluetooth-compat
 export IMG_PATH=${MYDROID}/out/target/product/${BOARD_TYPE}
 export MYIMG=${MYDROID}/../prebuilt_images
 export PATH=$PATH:${MYDROID}/../../../toolchain/arm-2010q1/bin
@@ -43,6 +44,28 @@ cp ${WLAN_PATH}/net/wireless/cfg80211.ko ${IMG_PATH}/system/lib/modules/
 cp ${WLAN_PATH}/net/mac80211/mac80211.ko ${IMG_PATH}/system/lib/modules/
 cp ${WLAN_PATH}/drivers/net/wireless/wl12xx/wl12xx.ko ${IMG_PATH}/system/lib/modules/
 cp ${WLAN_PATH}/drivers/net/wireless/wl12xx/wl12xx_sdio.ko ${IMG_PATH}/system/lib/modules/
+
+#============================
+#Building BlueTI driver
+#============================
+echo -e "${YELLOW}Building BlueTI Driver...${NORMAL}"
+export THRD_COUNT=$[ `getconf _NPROCESSORS_ONLN` * 2]
+export BLUETI_ENHANCEMENT=1
+cd ${BLUETI_PATH}
+./scripts/driver-select bt
+make clean
+make ARCH=arm KLIB=$KLIB KLIB_BUILD=$KLIB_BUILD -j$THRD_COUNT 
+source copykos.sh
+echo -e "${YELLOW}Copy BlueTI modules${NORMAL}"
+rm -fr ${IMG_PATH}/system/lib/modules/ti-bluez-ko/
+mkdir -p ${IMG_PATH}/system/lib/modules/ti-bluez-ko/
+cp -v ${BLUETI_PATH}/kos/compat.ko ${IMG_PATH}/system/lib/modules/ti-bluez-ko/
+cp -v ${BLUETI_PATH}/kos/bluetooth.ko ${IMG_PATH}/system/lib/modules/ti-bluez-ko/ 
+cp -v ${BLUETI_PATH}/kos/rfcomm.ko ${IMG_PATH}/system/lib/modules/ti-bluez-ko/
+cp -v ${BLUETI_PATH}/kos/hidp.ko ${IMG_PATH}/system/lib/modules/ti-bluez-ko/
+cp -v ${BLUETI_PATH}/kos/btwilink.ko ${IMG_PATH}/system/lib/modules/ti-bluez-ko/
+cp -v ${BLUETI_PATH}/kos/bnep.ko ${IMG_PATH}/system/lib/modules/ti-bluez-ko/
+cd ${MYDROID}
 
 # ============================
 # Building GPS driver
